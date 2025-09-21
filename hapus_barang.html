@@ -1,0 +1,12 @@
+
+{% extends 'inventory/base.html' %}
+{% block title %}Hapus Barang{% endblock %}
+{% block content %}
+<h2>Hapus Barang</h2>
+<p>Apakah Anda yakin ingin menghapus <strong>{{ barang.nama_barang }}</strong> ({{ barang.kode_barang }})?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Ya, hapus</button>
+    <a href="{% url 'daftar_barang' %}">Batal</a>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+<div class="container">
+    <h1>➕ Tambah Transaksi Stok Masuk</h1>
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-3">
+            <label class="form-label">Barang</label>
+            {{ form.barang }}
+        </div>
+
+        <!-- Info tambahan dari Barang -->
+        {% if form.instance.barang %}
+        <div class="mb-3">
+            <label class="form-label">Nama Tujuan</label>
+            <input type="text" class="form-control" value="{{ form.instance.barang.nama_tujuan|default:'-' }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nama Tujuan Perusahaan</label>
+            <input type="text" class="form-control" value="{{ form.instance.barang.nama_tujuan_perusahaan|default:'-' }}" readonly>
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Jumlah</label>
+            {{ form.jumlah }}
+        </div>
+
+        <button type="submit" class="btn btn-success">💾 Simpan</button>
+        <a href="{% url 'transaksi_stok' %}" class="btn btn-secondary">⬅️ Kembali</a>
+    </form>
+</div>
+{% endblock %}

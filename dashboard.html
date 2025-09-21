@@ -1,0 +1,56 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+<div class="container">
+    <h1>📊 Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Barang</h5>
+                    <p class="card-text display-6">{{ total_barang }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Stok</h5>
+                    <p class="card-text display-6">{{ total_stock }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Stok Rendah (&le; 5)</h5>
+                    <p class="card-text display-6">{{ low_stock }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mt-4">Transaksi Terbaru</h3>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Tanggal</th>
+                <th>Barang</th>
+                <th>Tipe</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trx in recent_transactions %}
+            <tr>
+                <td>{{ trx.tanggal|date:"d-m-Y" }}</td>
+                <td>{{ trx.barang.nama_barang }}</td>
+                <td>{{ trx.tipe|title }}</td>
+                <td>{{ trx.jumlah }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-center">Belum ada transaksi</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
